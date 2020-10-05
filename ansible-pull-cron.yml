@@ -1,0 +1,10 @@
+- name: Install cron for ansible-user
+  cron:
+    user: "{{ user }}"
+    name: ansible-pull
+    minute: "*/1"
+    job: >-
+      tags=`curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?alt=text" -H "Metadata-Flavor: Google"`;
+      export tags=`echo $tags | sed 's/ /,/g'`;
+      /usr/bin/ansible-pull -o -U git@github.com:obstaclex/ansible_pull.git -t $tags> /tmp/ansible-log.txt
+
