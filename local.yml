@@ -37,11 +37,8 @@
       yum: 
         name: tomcat
       tags:
-        - tomcat
-<<<<<<< HEAD
-        
-=======
->>>>>>> 571de33a864f287efe96f1a2ab6a684332faf2c5
+        - tomcat      
+
     - name: check tomcat started and enabled
       become: yes
       systemd:
@@ -49,8 +46,6 @@
         state: started
         enabled: yes
       tags:
-<<<<<<< HEAD
         - tomcat
-=======
-        - tomcat
->>>>>>> 571de33a864f287efe96f1a2ab6a684332faf2c5
+
+
