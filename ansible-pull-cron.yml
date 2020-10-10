@@ -6,5 +6,5 @@
     job: >-
       tags=`curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?alt=text" -H "Metadata-Flavor: Google"`;
       export tags=`echo $tags | sed 's/ /,/g'`;
-      /usr/bin/ansible-pull -o -U git@github.com:obstaclex/ansible_pull.git -t $tags> /tmp/ansible-log.txt
+      /usr/bin/ansible-pull -o -U https://github.com/zedex11/ansible_pull.git -t $tags> /tmp/ansible-log.txt
 
