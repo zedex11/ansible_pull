@@ -22,7 +22,7 @@
           - wget
           - htop
       tags:
-        - webapp
+        - httpd
         
     - name: httpd restart
       become: yes
@@ -30,7 +30,7 @@
         name: httpd
         state: restarted
       tags:
-        - webapp
+        - httpd
 
 
 
@@ -39,11 +39,11 @@
       yum: 
         name: tomcat
       tags:
-        - db
+        - tomcat
     - name: tomcat restart
       become: yes
       systemd:
         name: tomcat
         state: restarted
       tags:
-        - db
+        - tomcat
