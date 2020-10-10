@@ -8,13 +8,14 @@ variable "us_zone" {
 }
 variable "eu_zone" {
 }
-variable "network_name" {
-}
-variable "custom_rules" {
+variable "ports" {
+  type = list
 }
 variable "ssh_username" {
 }
 variable "ssh_key" {
 }
 variable "ansible_startup" {
+}
+variable "network_name" {
 }

@@ -8,68 +8,40 @@ provider "google" {
   alias   = "eu"
 }
 
-terraform {
-  backend "gcs" {
-    bucket = "imelnik1-exit_task"
-    prefix = "ansible-pull/"
-  }
-}
+# terraform {
+#   backend "gcs" {
+#     bucket = "imelnik1-exit_task"
+#     prefix = "ansible-pull/"
+#   }
+# }
 
-module "network" {
-  source                  = "./modules/network"
-  network_name            = var.network_name
-  auto_create_subnetworks = true
-}
 
 module "firewall" {
   source       = "./modules/firewall"
   network_name = var.network_name
-  custom_rules = var.custom_rules
-  depends_on   = [module.network]
+  ports        = var.ports
 }
 
-module "web_instance" {
+module "tomcat_instance" {
   source         = "./modules/instance"
-  instance_count = 2
+  instance_count = 1
   zone           = var.us_zone
-  name           = "webapp"
+  name           = "tomcat"
   source_image   = "ansible-pull-image"
   ssh_key        = "${var.ssh_username}:${file(var.ssh_key)}"
   startup_script = file(var.ansible_startup)
-  labels = {
-    instance = "webapp"
-  }
-  tags       = ["webapp"]
-  depends_on = [module.network]
+  tags       = ["tomcat"]
 }
 
-module "db_instance" {
+module "httpd_instance" {
   source = "./modules/instance"
   providers = {
     google = google.eu
   }
   zone           = var.eu_zone
-  name           = "db"
+  name           = "httpd"
   source_image   = "ansible-pull-image"
   ssh_key        = "${var.ssh_username}:${file(var.ssh_key)}"
   startup_script = file(var.ansible_startup)
-  labels = {
-    instance = "db"
-  }
-  tags       = ["db"]
-  depends_on = [module.network]
-}
-
-module "check_instance" {
-  source         = "./modules/instance"
-  zone           = var.us_zone
-  name           = "db-check"
-  source_image   = "ansible-pull-image"
-  ssh_key        = "${var.ssh_username}:${file(var.ssh_key)}"
-  startup_script = file(var.ansible_startup)
-  labels = {
-    instance = "db-check"
-  }
-  tags       = ["db-check"]
-  depends_on = [module.network]
+  tags       = ["httpd"]
 }

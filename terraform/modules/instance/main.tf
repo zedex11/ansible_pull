@@ -17,13 +17,8 @@ resource "google_compute_instance" "default" {
     }
   }
   network_interface {
-    network    = var.subnet_name == "" ? var.network_name : ""
-    subnetwork = var.subnet_name
-    dynamic "access_config" {
-      for_each = var.ext_ip ? [""] : []
-      content {
-        nat_ip = access_config.value
-      }
+    network    = "default"
+    access_config {
     }
   }
 }

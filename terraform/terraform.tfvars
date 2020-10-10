@@ -1,28 +1,10 @@
-project_id      = "devops-lab-summer"
+project_id      = "my-day01-project"
 us_region       = "us-central1"
 us_zone         = "us-central1-c"
 eu_region       = "europe-west1"
 eu_zone         = "europe-west1-b"
-network_name    = "network"
-ssh_username    = "obstaclex"
+network_name    = "default"
+ssh_username    = "ansible"
 ssh_key         = "~/.ssh/id_rsa.pub"
 ansible_startup = "ansible.sh"
-
-custom_rules = {
-  extarnal-firewall = {
-    action  = "allow"
-    ranges  = ["0.0.0.0/0"]
-    sources = []
-    targets = []
-    rules = [
-      {
-        protocol = "icmp"
-        ports    = []
-      },
-      {
-        protocol = "tcp"
-        ports    = ["22", "80", "3306"]
-      }
-    ]
-  }
-}
+ports           = ["22", "80", "8080"]
