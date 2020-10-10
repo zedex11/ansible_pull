@@ -38,7 +38,7 @@
         name: tomcat
       tags:
         - tomcat
-    - name: tomcat restart
+    - name: check tomcat started and enabled
       become: yes
       systemd:
         name: tomcat
