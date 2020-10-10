@@ -14,27 +14,25 @@
       vars:
         user: "{{ pull_user }}"
 
-    - name: Install packages
+    - name: Install httpd
       become: yes
       yum: 
-        name: 
-          - httpd
-          - wget
-          - htop
+        name: httpd
       tags:
         - httpd
         
-    - name: httpd restart
+    - name: check httpd start and enabled
       become: yes
       systemd:
         name: httpd
-        state: restarted
+        state: started
+        enabled: yes
       tags:
         - httpd
 
 
 
-    - name: Install db
+    - name: Install tomcat
       become: yes
       yum: 
         name: tomcat
@@ -44,6 +42,7 @@
       become: yes
       systemd:
         name: tomcat
-        state: restarted
+        state: started
+        enabled: yes
       tags:
         - tomcat
