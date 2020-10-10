@@ -20,7 +20,6 @@
         name: httpd
       tags:
         - httpd
-        
     - name: check httpd start and enabled
       become: yes
       systemd:
@@ -31,14 +30,12 @@
         - httpd
 
 
-
     - name: Install tomcat
       become: yes
       yum: 
         name: tomcat
       tags:
         - tomcat      
-
     - name: check tomcat started and enabled
       become: yes
       systemd:
@@ -48,4 +45,19 @@
       tags:
         - tomcat
 
+    - name: Copy tomcat application
+      become: yes
+      copy: 
+        src: index.html
+        dest: /var/www/html/index.html
+      tags:
+        - httpd
 
+
+    - name: Copy tomcat application
+      become: yes
+      copy: 
+        src: clusterjsp.war
+        dest: /var/lib/tomcat/webapps/clusterjsp.war
+      tags:
+        - tomcat
