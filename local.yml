@@ -45,19 +45,19 @@
       tags:
         - tomcat
 
-    # - name: Copy tomcat application
-    #   become: yes
-    #   copy: 
-    #     src: index.html
-    #     dest: /var/www/html/index.html
-    #   tags:
-    #     - httpd
+    - name: Copy tomcat application
+      become: yes
+      copy: 
+        src: index.html
+        dest: /var/www/html/index.html
+      tags:
+        - httpd
 
 
-    # - name: Copy tomcat application
-    #   become: yes
-    #   copy: 
-    #     src: clusterjsp.war
-    #     dest: /var/lib/tomcat/webapps/clusterjsp.war
-    #   tags:
-    #     - tomcat
+    - name: Copy tomcat application
+      become: yes
+      copy: 
+        src: clusterjsp.war
+        dest: /var/lib/tomcat/webapps/clusterjsp.war
+      tags:
+        - tomcat
